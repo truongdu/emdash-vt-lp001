@@ -1,0 +1,59 @@
+---
+import { getEmDashCollection } from "emdash";
+import { Image } from "emdash/ui";
+
+interface Props {
+	value: { heading?: string | null };
+}
+const { value } = Astro.props;
+
+const { entries: posts } = await getEmDashCollection("posts", {
+	orderBy: { published_at: "desc" },
+	limit: 6,
+});
+
+function formatDate(d?: Date | null) {
+	if (!d) return "";
+	const dd = String(d.getDate()).padStart(2, "0");
+	const mm = String(d.getMonth() + 1).padStart(2, "0");
+	return `${dd}.${mm}.${d.getFullYear()}`;
+}
+---
+
+<section id="boxcolumn" class="sec_boxcolumn">
+	<div class="inner">
+		<div class="boxcolumn_top">
+			<h3 class="title" data-aos="fade-up">
+				<span class="en">Column</span>
+				<span class="vn">{value.heading}</span>
+			</h3>
+			<div class="column_arrows"></div>
+		</div>
+		<div id="columnbox_slider" class="boxcolumn_list">
+			{posts.length === 0 ? (
+				<p>Chưa có bài viết nào.</p>
+			) : (
+				posts.map((post) => (
+					<div class="columnbox_detail">
+						<a href={`/column/${post.id}`}></a>
+						<dl>
+							<dt>
+								{post.data.featured_image ? (
+									<Image image={post.data.featured_image} />
+								) : (
+									<img src="/assets/images/news_img_dummy.jpg" alt={post.data.title} />
+								)}
+							</dt>
+						</dl>
+						<div class="columnbox_info">
+							<p class="columnbox_ttl"><span class="tagttl">{post.data.title}</span></p>
+							{post.data.excerpt && <p class="columnbox_txt">{post.data.excerpt}</p>}
+						</div>
+						<p class="columnbox_day">{formatDate(post.data.publishedAt)}</p>
+					</div>
+				))
+			)}
+		</div>
+		<p class="btn" data-aos="fade-up"><a href="/column/"><span class="bg">Xem tất cả</span></a></p>
+	</div>
+</section>

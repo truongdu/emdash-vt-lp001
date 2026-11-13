@@ -1,0 +1,44 @@
+---
+interface Props {
+	value: { heading: string; description?: string | null };
+}
+const { value } = Astro.props;
+---
+
+<section id="contact" class="sec_contact">
+	<div class="inner">
+		<div class="sec_contact_ct">
+			<div class="animate_contact ani_lottie">
+				<lottie-player src="/assets/json/mail_comp_export.json" background="transparent" speed="1" class="canvas_contact" loop autoplay></lottie-player>
+			</div>
+			<h3 class="title left" data-aos="fade-up">
+				<span class="en">Contact Us</span>
+				<span class="vn">{value.heading}</span>
+			</h3>
+			{value.description && <p data-aos="fade-up">{value.description}</p>}
+			<div class="contact_form" data-aos="fade-up">
+				<form id="contact-form" method="post">
+					<p>
+						<label>Họ và tên<span class="req">必須</span></label>
+						<input type="text" name="name" required />
+					</p>
+					<p>
+						<label>Email<span class="req">必須</span></label>
+						<input type="email" name="email" required />
+					</p>
+					<p>
+						<label>Số điện thoại</label>
+						<input type="tel" name="phone" />
+					</p>
+					<p>
+						<label>Nội dung</label>
+						<textarea name="message" rows="5"></textarea>
+					</p>
+					<div class="list_btn">
+						<button type="submit">Gửi</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</section>

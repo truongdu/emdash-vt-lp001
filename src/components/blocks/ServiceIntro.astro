@@ -1,0 +1,21 @@
+---
+interface Props {
+	value: { heading: string; body: string };
+}
+const { value } = Astro.props;
+---
+
+<section class="sec_service" id="service">
+	<div class="inner">
+		<h3 class="title" data-aos="fade-up">
+			<span class="en">Our Service</span>
+			<span class="vn">{value.heading}</span>
+		</h3>
+		<div class="sec_service_ct" data-aos="fade-up">
+			<p set:html={value.body}></p>
+		</div>
+		<div class="animate_service ani_lottie">
+			<lottie-player src="/assets/json/service_comp.json" background="transparent" speed="1" class="canvas_service" loop autoplay></lottie-player>
+		</div>
+	</div>
+</section>

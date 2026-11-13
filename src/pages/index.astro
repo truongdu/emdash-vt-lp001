@@ -1,0 +1,351 @@
+---
+import { getEmDashCollection, getSiteSettings } from "emdash";
+import { Image } from "emdash/ui";
+import Base from "../layouts/Base.astro";
+import { resolveStarterSiteIdentity } from "../utils/site-identity";
+
+const { entries: columnPosts, cacheHint } = await getEmDashCollection("posts", {
+	orderBy: { published_at: "desc" },
+	limit: 6,
+});
+if (Astro.cache?.enabled) Astro.cache.set(cacheHint);
+
+const { siteTitle, siteTagline } = resolveStarterSiteIdentity(
+	await getSiteSettings(),
+);
+
+function formatDate(d?: Date | null) {
+	if (!d) return "";
+	const dd = String(d.getDate()).padStart(2, "0");
+	const mm = String(d.getMonth() + 1).padStart(2, "0");
+	return `${dd}.${mm}.${d.getFullYear()}`;
+}
+---
+
+<Base title={siteTitle} description={siteTagline} bodyId="index" bodyClass="">
+	<!-- SECTION MV -->
+	<section class="mv">
+		<div class="inner">
+			<div class="mv_txt" data-aos="fade-up">
+				<h2>Mang <span>"Sức mạnh"</span> <br />đến trang <span>Website của bạn</span></h2>
+				<p class="mv_des">Chúng tôi cam kết làm việc với <span>tinh thần</span> <br />như một <span>Webmaster cho khách hàng</span></p>
+			</div>
+			<div class="animate_mv ani_lottie">
+				<lottie-player src="/assets/json/mv_comp.json" background="transparent" speed="1" class="canvas_mv" loop autoplay></lottie-player>
+			</div>
+			<div class="mv_list">
+				<ul>
+					<li data-aos="fade-up" data-aos-delay="400">
+						<span class="img"><img src="/assets/images/ic_mv1.png" alt="Icon" /></span>
+						<span class="txt">Giao diện thân thiện <br class="pc440" />với người dùng</span>
+					</li>
+					<li data-aos="fade-up" data-aos-delay="400">
+						<span class="img"><img src="/assets/images/ic_mv3.png" alt="Icon" /></span>
+						<span class="txt">Bảo mật tốt - <br />Quản trị Wordpress dễ dàng</span>
+					</li>
+				</ul>
+				<ul>
+					<li data-aos="fade-up" data-aos-delay="600" data-aos-offset="0">
+						<span class="img"><img src="/assets/images/ic_mv2.png" alt="Icon" /></span>
+						<span class="txt">Thiết kế Website <br class="pc440" />chuẩn SEO</span>
+					</li>
+					<li data-aos="fade-up" data-aos-delay="600" data-aos-offset="0">
+						<span class="img"><img src="/assets/images/ic_mv4.png" alt="Icon" /></span>
+						<span class="txt">Tối ưu trên tất cả thiết bị</span>
+					</li>
+					<li class="last" data-aos="fade-up" data-aos-delay="600" data-aos-offset="0">
+						<span class="img"><img src="/assets/images/ic_mv5.png" alt="Icon" /></span>
+						<span class="txt">Bảo trì website hàng tháng</span>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</section>
+
+	<!-- SECTION STRENGTH -->
+	<section class="sec_strength">
+		<div class="inner" data-aos="fade-up">
+			<h3 class="title" id="strength">
+				<span class="en">Strength</span>
+				<span class="vn">3 ĐIỂM MẠNH CỦA VIETRY</span>
+			</h3>
+
+			<ul class="strength_list" data-aos="fade-up">
+				<li>
+					<span class="numb">01</span>
+					<span class="txt">Hơn 10 năm <br />kinh nghiệm <br />thiết kế Website</span>
+				</li>
+				<li>
+					<span class="numb">02</span>
+					<span class="txt">Đội ngũ <br />nhân viên có <br />trình độ <br />chuyên môn cao</span>
+				</li>
+				<li>
+					<span class="numb">03</span>
+					<span class="txt">Tạo ra <br />giá trị và <br />sự hài lòng</span>
+				</li>
+			</ul>
+		</div>
+	</section>
+
+	<!-- SECTION WHY -->
+	<section class="sec_why">
+		<div class="inner">
+			<div class="sec_why_ct">
+				<h3 class="title left" data-aos="fade-up">
+					<span class="en yel">Why you should <br />use our service ?</span>
+					<span class="vn">Lý do bạn nên sử dụng <br />Dịch vụ chúng tôi ?</span>
+				</h3>
+				<p class="des" data-aos="fade-up">Bạn đang tìm kiếm một đối tác phát triển và <br />sản xuất website đáng tin cậy cho quý công ty ?</p>
+				<div class="why_box" data-aos="fade-up">
+					<p class="year">Trên <span>10</span></p>
+					<p class="exp"><span>NĂM</span>kinh nghiệm đội ngũ thiết kế và <br class="pc" />lập trình dày dặn kinh nghiệm, VIETRY tin rằng sẽ đáp ứng <br class="pc" />nhu cầu của bạn.</p>
+				</div>
+			</div>
+			<div class="animate_why ani_lottie">
+				<lottie-player src="/assets/json/strength_comp.json" background="transparent" speed="1" class="canvas_why" loop autoplay></lottie-player>
+			</div>
+		</div>
+	</section>
+
+	<!-- SECTION SERVICE -->
+	<section class="sec_service" id="service">
+		<div class="inner">
+			<h3 class="title" data-aos="fade-up">
+				<span class="en">Our Service</span>
+				<span class="vn">Dịch vụ của chúng tôi</span>
+			</h3>
+			<div class="sec_service_ct" data-aos="fade-up">
+				<p class="big">Thiết kế website</p>
+				<p>Website là bộ mặt đại diện thương hiệu và thể hiện sự chuyên nghiệp của doanh nghiệp. <br class="pc" />Với <span class="bold">hơn 10 năm</span> kinh nghiệm <span class="bold">thiết kế website</span> cho các công ty Nhật Bản tại thị trường Việt Nam. <br class="pc" /><span class="bold">VIETRY luôn lắng nghe ý kiến, nhu cầu từ khách hàng</span> và <br class="pc" />tìm hiểu về đối thủ cạnh tranh của khách hàng.</p>
+			</div>
+			<div class="animate_service ani_lottie">
+				<lottie-player src="/assets/json/service_comp.json" background="transparent" speed="1" class="canvas_service" loop autoplay></lottie-player>
+			</div>
+		</div>
+	</section>
+
+	<!-- SECTION PROCESS -->
+	<section class="sec_process" id="process">
+		<div class="inner">
+			<h3 class="title left">
+				<span class="en yel">Process</span>
+				<span class="vn">Quy trình sản xuất</span>
+			</h3>
+			<div class="sec_process_list">
+				<ul>
+					<li data-aos="fade-up" data-aos-delay="200"><span class="numb">1</span>Thu thập thông tin và <br />nhu cầu khách hàng</li>
+					<li data-aos="fade-up" data-aos-delay="300"><span class="numb">2</span>Lên kế hoạch và tìm hiểu <br />đối thủ cạnh tranh</li>
+					<li data-aos="fade-up" data-aos-delay="400"><span class="numb">3</span>Thiết kế</li>
+					<li data-aos="fade-up" data-aos-delay="500"><span class="numb">4</span>Lập trình</li>
+					<li data-aos="fade-up" data-aos-delay="600"><span class="numb">5</span>Hoàn thiện và bàn giao</li>
+				</ul>
+			</div>
+			<div class="animate_process ani_lottie">
+				<lottie-player src="/assets/json/process.json" background="transparent" speed="2" class="canvas_process" loop autoplay></lottie-player>
+			</div>
+		</div>
+	</section>
+
+	<!-- SECTION CUSTOMER -->
+	<section class="sec_customer">
+		<div class="inner">
+			<h3 class="title" data-aos="fade-up">
+				<span class="en">Typical Customers</span>
+				<span class="vn">KHÁCH HÀNG TIÊU BIỂU<br />Các công ty Nhật Bản <br class="sp440" />tại Việt Nam</span>
+			</h3>
+		</div>
+
+		<div class="sec_customer_slick">
+			<ul class="sec_customer_list" data-aos="fade-up">
+				<li><a href="https://919vn.com/" target="_blank"><img src="/assets/images/customer_img_1.png" alt="Logo" /></a></li>
+				<li><a href="https://www.rorzerobotech.com/vi/" target="_blank"><img src="/assets/images/customer_img_2.png" alt="Logo" /></a></li>
+				<li><a href="https://www.nipponsteel.com/" target="_blank"><img src="/assets/images/customer_img_3.png" alt="Logo" /></a></li>
+			</ul>
+		</div>
+	</section>
+
+	<!-- SECTION FAQ -->
+	<section class="sec_faq">
+		<div class="inner" id="faq">
+			<h3 class="title" data-aos="fade-up">
+				<span class="en yel">Faq</span>
+				<span class="vn">Câu hỏi thường gặp</span>
+			</h3>
+			<div class="faq_list" data-aos="fade-up">
+				<dl>
+					<dt><span class="en">Q</span>Hãy cho chúng tôi biết chi phí và ngày giao hàng ?</dt>
+					<dd><span class="en">A</span>
+						<p>Chi phí và ngày giao hàng sẽ phụ thuộc vào số lượng trang, đặc điểm kỹ thuật, tính năng nhưng thường tối đa khoảng 6~15 trang thì tầm 50 triệu -100 triệu (Chỉ 1 ngôn ngữ và không triển khai hệ thống) Về ngày giao hàng, khoảng 1 tháng từ khi nhận đầy đủ nội dung, hình ảnh từ khách hàng.</p>
+					</dd>
+				</dl>
+				<dl>
+					<dt><span class="en">Q</span>Cần cung cấp những gì khi thiết kế website ?</dt>
+					<dd><span class="en">A</span>
+						<p>Khách hàng cần chuẩn bị cung cấp <br />
+						+ Logo và thông tin hình ảnh về công ty, <br />
+						+ Thông tin, hình ảnh và quy trình của sản phẩm hoặc dịch vụ... <br />
+						+ Các đối tác <br />
+						+ Các sự kiện, hoạt động, lịch sử công ty... mà bạn muốn hiển thị trên website</p>
+					</dd>
+				</dl>
+				<dl>
+					<dt><span class="en">Q</span>Bạn có cung cấp dịch vụ tên miền và máy chủ không? Ai sẽ quản lý nó ?</dt>
+					<dd><span class="en">A</span>
+						<p>VIETRY cũng cấp máy chủ chỉ định và đại diện mua tên miền qua Z.com . Cả khách hàng và VIETRY đều có thể quản lý</p>
+					</dd>
+				</dl>
+				<dl>
+					<dt><span class="en">Q</span>Làm thế nào để đo lường được người sử dụng ghé thăm trang web của tôi ?</dt>
+					<dd><span class="en">A</span>
+						<p>VIETRY dùng công cụ miễn phí Google Analytics và Google Search Console để đo lường và phân tích chỉ số báo cáo. Từ đó có thể tìm cách đưa website của bạn tiếp cận gần với người sử dụng hơn</p>
+					</dd>
+				</dl>
+			</div>
+		</div>
+	</section>
+
+	<!-- SECTION COLUMN PREVIEW -->
+	<section id="boxcolumn" class="sec_boxcolumn">
+		<div class="inner">
+			<div class="boxcolumn_top">
+				<h3 class="title" data-aos="fade-up">
+					<span class="en">Column</span>
+					<span class="vn">Column thông tin mới nhất</span>
+				</h3>
+				<div class="column_arrows"></div>
+			</div>
+			<div id="columnbox_slider" class="boxcolumn_list">
+				{columnPosts.length === 0 ? (
+					<p>Chưa có bài viết nào.</p>
+				) : (
+					columnPosts.map((post) => (
+						<div class="columnbox_detail">
+							<a href={`/column/${post.id}`}></a>
+							<dl>
+								<dt>
+									{post.data.featured_image ? (
+										<Image image={post.data.featured_image} />
+									) : (
+										<img src="/assets/images/news_img_dummy.jpg" alt={post.data.title} />
+									)}
+								</dt>
+							</dl>
+							<div class="columnbox_info">
+								<p class="columnbox_ttl"><span class="tagttl">{post.data.title}</span></p>
+								{post.data.excerpt && <p class="columnbox_txt">{post.data.excerpt}</p>}
+							</div>
+							<p class="columnbox_day">{formatDate(post.data.publishedAt)}</p>
+						</div>
+					))
+				)}
+			</div>
+			<p class="btn" data-aos="fade-up"><a href="/column/"><span class="bg">Xem tất cả</span></a></p>
+		</div>
+	</section>
+
+	<!-- SECTION CONTACT -->
+	<section id="contact" class="sec_contact">
+		<div class="inner">
+			<div class="sec_contact_ct">
+				<div class="animate_contact ani_lottie">
+					<lottie-player src="/assets/json/mail_comp_export.json" background="transparent" speed="1" class="canvas_contact" loop autoplay></lottie-player>
+				</div>
+				<h3 class="title left" data-aos="fade-up">
+					<span class="en">Contact Us</span>
+					<span class="vn">Liên hệ</span>
+				</h3>
+				<p data-aos="fade-up">Bạn đang cần hỗ trợ về thiết kế website <br class="sp440" />và nhận dạng thương hiệu.<br />Vui lòng điền thông tin bên dưới <br class="sp440" />để được hỗ trợ ngay lập tức</p>
+				<div class="contact_form" data-aos="fade-up">
+					<form id="contact-form" method="post" action="/api/contact">
+						<dl>
+							<dt>Họ và tên<span class="must">*</span></dt>
+							<dd><input type="text" name="name" required /></dd>
+						</dl>
+						<dl>
+							<dt>Email<span class="must">*</span></dt>
+							<dd><input type="email" name="email" required /></dd>
+						</dl>
+						<dl>
+							<dt>Số điện thoại</dt>
+							<dd><input type="tel" name="phone" /></dd>
+						</dl>
+						<dl class="full">
+							<dt>Nội dung<span class="must">*</span></dt>
+							<dd><textarea name="message" rows="5" required></textarea></dd>
+						</dl>
+						<p class="hp-field" aria-hidden="true">
+							<label>Website</label>
+							<input type="text" name="website" tabindex="-1" autocomplete="off" />
+						</p>
+						<p class="form_message" role="status" hidden></p>
+						<div class="list_btn">
+							<button type="submit">Gửi</button>
+						</div>
+					</form>
+				</div>
+
+				<style>
+					.hp-field {
+						position: absolute;
+						left: -9999px;
+						width: 1px;
+						height: 1px;
+						overflow: hidden;
+					}
+					.form_message {
+						margin: 1em 0;
+						font-weight: bold;
+					}
+					.form_message.is-error {
+						color: #c0392b;
+					}
+					.form_message.is-success {
+						color: #27ae60;
+					}
+				</style>
+				<script is:inline>
+					(function () {
+						var form = document.getElementById("contact-form");
+						if (!form) return;
+						var msgEl = form.querySelector(".form_message");
+						form.addEventListener("submit", function (e) {
+							e.preventDefault();
+							var btn = form.querySelector("button[type=submit]");
+							btn.disabled = true;
+							msgEl.hidden = true;
+							msgEl.className = "form_message";
+
+							fetch("/api/contact", {
+								method: "POST",
+								body: new FormData(form),
+							})
+								.then(function (res) {
+									return res.json().then(function (data) {
+										return { ok: res.ok, data: data };
+									});
+								})
+								.then(function (result) {
+									if (result.ok && result.data.success) {
+										window.location.href = "/thanks/";
+										return;
+									}
+									var errors =
+										(result.data && result.data.errors) || ["Có lỗi xảy ra, vui lòng thử lại."];
+									msgEl.textContent = errors.join(", ");
+									msgEl.className = "form_message is-error";
+									msgEl.hidden = false;
+									btn.disabled = false;
+								})
+								.catch(function () {
+									msgEl.textContent = "Không thể kết nối máy chủ, vui lòng thử lại.";
+									msgEl.className = "form_message is-error";
+									msgEl.hidden = false;
+									btn.disabled = false;
+								});
+						});
+					})();
+				</script>
+			</div>
+		</div>
+	</section>
+</Base>

@@ -1,0 +1,79 @@
+---
+import {
+	getEmDashEntry,
+	getSeoMeta,
+	decodeSlug,
+	getSiteSettings,
+} from "emdash";
+import { Image, PortableText } from "emdash/ui";
+import Base from "../../layouts/Base.astro";
+import { resolveStarterSiteIdentity } from "../../utils/site-identity";
+
+const slug = decodeSlug(Astro.params.slug);
+
+if (!slug) {
+	return Astro.rewrite("/404");
+}
+
+const { entry: post, cacheHint } = await getEmDashEntry("posts", slug);
+
+if (!post) {
+	return Astro.rewrite("/404");
+}
+
+if (Astro.cache?.enabled) Astro.cache.set(cacheHint);
+const { siteTitle } = resolveStarterSiteIdentity(await getSiteSettings());
+
+const seo = getSeoMeta(post, {
+	siteTitle,
+	siteUrl: Astro.url.origin,
+	path: Astro.url.pathname.replace(/\/$/, ""),
+});
+
+function formatDate(d?: Date | null) {
+	if (!d) return "";
+	const dd = String(d.getDate()).padStart(2, "0");
+	const mm = String(d.getMonth() + 1).padStart(2, "0");
+	return `${dd}.${mm}.${d.getFullYear()}`;
+}
+---
+
+<Base
+	title={seo.title}
+	pageTitle={seo.ogTitle}
+	description={seo.description}
+	canonical={seo.canonical}
+	image={seo.ogImage}
+	content={{ collection: "posts", id: post.data.id, slug }}
+	bodyId="column"
+	bodyClass="under under_column"
+>
+	<article id="under_topinfo">
+		<div class="inner">
+			<h1 {...post.edit.title}>{post.data.title}</h1>
+		</div>
+	</article>
+	<div id="topic_path">
+		<ul>
+			<li><a href="/">Trang chủ</a></li>
+			<li><a href="/column/">Column</a></li>
+			<li>{post.data.title}</li>
+		</ul>
+	</div>
+	<div class="inner">
+		<div class="under_column_content">
+			<div class="under_column_top">
+				<p class="date">{formatDate(post.data.publishedAt)}</p>
+			</div>
+			{post.data.featured_image && (
+				<p class="column_thumb" {...post.edit.featured_image}>
+					<Image image={post.data.featured_image} />
+				</p>
+			)}
+			<div {...post.edit.content}>
+				<PortableText value={post.data.content} />
+			</div>
+			<p class="btn"><a href="/column/"><span class="bg"><span>Về Trang Column</span></span></a></p>
+		</div>
+	</div>
+</Base>

@@ -1,0 +1,31 @@
+---
+interface Props {
+	value: {
+		heading: string;
+		description?: string | null;
+		years?: string | null;
+		years_description?: string | null;
+	};
+}
+const { value } = Astro.props;
+---
+
+<section class="sec_why">
+	<div class="inner">
+		<div class="sec_why_ct">
+			<h3 class="title left" data-aos="fade-up">
+				<span class="vn">{value.heading}</span>
+			</h3>
+			{value.description && <p class="des" data-aos="fade-up">{value.description}</p>}
+			{(value.years || value.years_description) && (
+				<div class="why_box" data-aos="fade-up">
+					{value.years && <p class="year">Trên <span>{value.years}</span></p>}
+					{value.years_description && <p class="exp"><span>NĂM</span>{value.years_description}</p>}
+				</div>
+			)}
+		</div>
+		<div class="animate_why ani_lottie">
+			<lottie-player src="/assets/json/strength_comp.json" background="transparent" speed="1" class="canvas_why" loop autoplay></lottie-player>
+		</div>
+	</div>
+</section>

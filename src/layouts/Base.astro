@@ -1,0 +1,171 @@
+---
+import { getSiteSettingsWithCacheHint } from "emdash";
+import { EmDashHead, EmDashBodyStart, EmDashBodyEnd } from "emdash/ui";
+import { createPublicPageContext } from "emdash/page";
+import { resolveStarterSiteIdentity } from "../utils/site-identity";
+
+interface Props {
+	title: string;
+	pageTitle?: string | null;
+	description?: string | null;
+	image?: string | null;
+	canonical?: string | null;
+	content?: { collection: string; id: string; slug?: string | null };
+	bodyId?: string;
+	bodyClass?: string;
+}
+
+const {
+	title,
+	pageTitle,
+	description,
+	image,
+	canonical,
+	content,
+	bodyId = "",
+	bodyClass = "under",
+} = Astro.props;
+
+const settingsResult = await getSiteSettingsWithCacheHint();
+if (Astro.cache?.enabled) Astro.cache.set(settingsResult.cacheHint);
+
+const { siteTitle, siteTagline } = resolveStarterSiteIdentity(
+	settingsResult.data,
+);
+const titleIncludesSiteName =
+	title === siteTitle ||
+	title.endsWith(` | ${siteTitle}`) ||
+	title.endsWith(` — ${siteTitle}`);
+const fullTitle = titleIncludesSiteName ? title : `${title} — ${siteTitle}`;
+const pageDescription = description ?? siteTagline;
+
+const isHome = bodyId === "index";
+const anchor = (hash: string) => (isHome ? `#${hash}` : `/#${hash}`);
+
+const pageCtx = createPublicPageContext({
+	Astro,
+	kind: content ? "content" : "custom",
+	pageType: "website",
+	title: fullTitle,
+	pageTitle: pageTitle ?? title,
+	description: pageDescription,
+	canonical,
+	image,
+	content,
+	siteName: siteTitle,
+});
+---
+
+<!doctype html>
+<html lang="vi">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="format-detection" content="telephone=no" />
+		<title>{fullTitle}</title>
+		<EmDashHead page={pageCtx} />
+
+		<link rel="icon" href="/favicon.ico" type="image/x-icon" sizes="16x16" />
+		<link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
+		<link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png" />
+		<link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png" />
+
+		<link rel="stylesheet" href="/assets/css/slick-theme.css" />
+		<link rel="stylesheet" href="/assets/css/slick.css" />
+		<link rel="stylesheet" href="/assets/css/aos.css" />
+		<link rel="stylesheet" href="/assets/css/base.css" />
+		<link rel="stylesheet" href="/assets/css/fonts.css" />
+		<link rel="stylesheet" href="/assets/css/styles.css" />
+		<link rel="stylesheet" href="/assets/css/responsive.css" />
+	</head>
+	<body id={bodyId} class={bodyClass} oncontextmenu="return false">
+		<EmDashBodyStart page={pageCtx} />
+
+		<div id="wrapper">
+			<header>
+				<div class="h_box">
+					<div class="h_left">
+						<h1 id="logo">
+							<a href="/">
+								<img class="off" src="/assets/images/logo.svg" width="236" alt={siteTitle} />
+								<img class="on" src="/assets/images/logo_on.svg" width="236" alt={siteTitle} />
+							</a>
+						</h1>
+					</div>
+
+					<div class="hamburger hamburger--3dxy">
+						<div class="hamburger-box">
+							<div class="hamburger-inner"></div>
+						</div>
+					</div>
+
+					<nav>
+						<ul class="nav_list">
+							<li><a href={anchor("strength")}>Điểm mạnh VIETRY<span class="en">Strength</span></a></li>
+							<li><a href={anchor("service")}>Dịch vụ<span class="en">Service</span></a></li>
+							<li><a href={anchor("process")}>Quy trình<span class="en">Process</span></a></li>
+							<li><a href={anchor("faq")}>Q&amp;A<span class="en">Faq</span></a></li>
+							<li><a href="/column/">Column<span class="en">Column</span></a></li>
+						</ul>
+						<p class="btn_main"><a href={anchor("contact")}>Liên hệ</a></p>
+					</nav>
+				</div>
+			</header>
+
+			<main>
+				<slot />
+			</main>
+
+			<footer>
+				<section class="ft_top">
+					<div class="inner">
+						<h3>Liên hệ ngay</h3>
+					</div>
+				</section>
+
+				<section class="ft_content">
+					<div class="ft_info">
+						<div class="inner">
+							<p class="ft_logo"><a href="/"><img src="/assets/images/logo.svg" alt="VieTry Logo" /></a></p>
+							<ul class="ft_link">
+								<li><a href={anchor("strength")}>Điểm mạnh</a></li>
+								<li><a href={anchor("service")}>Dịch vụ</a></li>
+								<li><a href={anchor("process")}>Quy trình</a></li>
+								<li><a href={anchor("faq")}>Q&amp;A</a></li>
+								<li><a href={anchor("contact")}>Liên hệ</a></li>
+								<li><a href="/column/">Column</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="ft_add">
+						<div class="inner">
+							<div class="ft_add_ct">
+								<p class="name_company">CÔNG TY TNHH VIETRY</p>
+								<p class="location">Tầng 1, Tòa nhà EBM, số 683-685 Điện Biên Phủ, <br class="pc" />Phường Thạnh Mỹ Tây, Tp.Hồ Chí Minh, Việt Nam.</p>
+								<p class="tel"><a href="tel:02836367283">028-3636-7283</a></p>
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<ul class="sp_contact sp">
+					<li class="sp_contact_tel"><a href="tel:028-3636-7283"><span>028-3636-7283</span></a></li>
+					<li class="sp_contact_mail"><a href={anchor("contact")}><span>Liên hệ</span></a></li>
+				</ul>
+			</footer>
+
+			<div class="to_top">
+				<a class="to_top_btn" href="#wrapper"><img src="/assets/images/to_top.png" alt="Back To Top" /></a>
+			</div>
+		</div>
+
+		<EmDashBodyEnd page={pageCtx} />
+
+		<script is:inline src="/assets/js/jquery.js"></script>
+		<script is:inline src="/assets/js/sweetlink.js"></script>
+		<script is:inline src="/assets/js/common.js"></script>
+		<script is:inline src="/assets/js/aos.js"></script>
+		<script is:inline src="/assets/js/slick.min.js"></script>
+		<script is:inline src="/assets/js/lottie-player.js"></script>
+	</body>
+</html>

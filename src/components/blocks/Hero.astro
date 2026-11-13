@@ -1,0 +1,44 @@
+---
+interface Props {
+	value: { title: string; subtitle?: string | null };
+}
+const { value } = Astro.props;
+---
+
+<section class="mv">
+	<div class="inner">
+		<div class="mv_txt" data-aos="fade-up">
+			<h2 set:html={value.title}></h2>
+			{value.subtitle && <p class="mv_des">{value.subtitle}</p>}
+		</div>
+		<div class="animate_mv ani_lottie">
+			<lottie-player src="/assets/json/mv_comp.json" background="transparent" speed="1" class="canvas_mv" loop autoplay></lottie-player>
+		</div>
+		<div class="mv_list">
+			<ul>
+				<li data-aos="fade-up" data-aos-delay="400">
+					<span class="img"><img src="/assets/images/ic_mv1.png" alt="Icon" /></span>
+					<span class="txt">Giao diện thân thiện <br class="pc440" />với người dùng</span>
+				</li>
+				<li data-aos="fade-up" data-aos-delay="400">
+					<span class="img"><img src="/assets/images/ic_mv3.png" alt="Icon" /></span>
+					<span class="txt">Bảo mật tốt - <br />Quản trị Wordpress dễ dàng</span>
+				</li>
+			</ul>
+			<ul>
+				<li data-aos="fade-up" data-aos-delay="600" data-aos-offset="0">
+					<span class="img"><img src="/assets/images/ic_mv2.png" alt="Icon" /></span>
+					<span class="txt">Thiết kế Website <br class="pc440" />chuẩn SEO</span>
+				</li>
+				<li data-aos="fade-up" data-aos-delay="600" data-aos-offset="0">
+					<span class="img"><img src="/assets/images/ic_mv4.png" alt="Icon" /></span>
+					<span class="txt">Tối ưu trên tất cả thiết bị</span>
+				</li>
+				<li class="last" data-aos="fade-up" data-aos-delay="600" data-aos-offset="0">
+					<span class="img"><img src="/assets/images/ic_mv5.png" alt="Icon" /></span>
+					<span class="txt">Bảo trì website hàng tháng</span>
+				</li>
+			</ul>
+		</div>
+	</div>
+</section>

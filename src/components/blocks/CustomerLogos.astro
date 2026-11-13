@@ -1,0 +1,35 @@
+---
+import { Image } from "emdash/ui";
+
+interface Item {
+	name: string;
+	url?: string | null;
+	logo?: unknown;
+}
+interface Props {
+	value: { heading?: string | null; items?: Item[] | null };
+}
+const { value } = Astro.props;
+const items = value.items ?? [];
+---
+
+<section class="sec_customer">
+	<div class="inner">
+		<h3 class="title" data-aos="fade-up">
+			<span class="en">Typical Customers</span>
+			<span class="vn" set:html={value.heading}></span>
+		</h3>
+	</div>
+
+	<div class="sec_customer_slick">
+		<ul class="sec_customer_list" data-aos="fade-up">
+			{items.map((item) => (
+				<li>
+					<a href={item.url ?? "#"} target="_blank" rel="noopener">
+						{item.logo ? <Image image={item.logo as never} /> : null}
+					</a>
+				</li>
+			))}
+		</ul>
+	</div>
+</section>

@@ -1,0 +1,24 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(\\([Security.Principal.WindowsIdentity]::GetCurrent\\(\\)\\).Groups -contains 'S-1-5-32-544')",
+      "Bash(node explore5.js)",
+      "Bash(curl -s -X POST http://localhost:4321/api/contact -d \"name=&email=&message=\" -w \"\\\\nHTTP: %{http_code}\\\\n\")",
+      "Bash(curl -s -X POST http://localhost:4321/api/contact -d \"name=Nguyen Van A&email=test@example.com&phone=0909xxxxxx&message=Toi can bao gia website\" -w \"\\\\nHTTP: %{http_code}\\\\n\")",
+      "Bash(curl -s -X POST http://localhost:4321/api/contact -d \"name=bot&email=bot@bot.com&message=spam&website=http://spam.com\" -w \"\\\\nHTTP: %{http_code}\\\\n\")",
+      "Bash(grep -A2 \"contact\" /tmp/dev7.log | tail -20)",
+      "Read(//tmp/**)",
+      "Bash(curl -s http://localhost:4321/ -o /tmp/home_contact_check.html)",
+      "Bash(node check_contact.js)",
+      "Bash(node check404.js)",
+      "Bash(find \"/d/09.VTry/emdashcms/vietry.com.vn_vn_old/vtry/images\" -iname \"*ajax*\")",
+      "Read(//d/09.VTry/emdashcms/vietry.com.vn_vn_old/vtry/images/**)",
+      "Bash(git config *)",
+      "Bash(git ls-remote *)",
+      "Read(//c/Users/DuPX/.ssh/**)",
+      "Bash(echo \"EXIT CODE: $?\")",
+      "Bash(ssh -T git@github.com -o StrictHostKeyChecking=no -o BatchMode=yes)",
+      "Bash(echo \"EXIT CODE SSH: $?\")"
+    ]
+  }
+}
