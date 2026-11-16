@@ -1,7 +1,7 @@
 import cloudflare from "@astrojs/cloudflare";
 import react from "@astrojs/react";
 import tailwindcss from "@tailwindcss/vite";
-import { d1, sandbox } from "@emdash-cms/cloudflare";
+import { d1 } from "@emdash-cms/cloudflare";
 import { defineConfig } from "astro/config";
 import emdash from "emdash/astro";
 import { betterAuthProvider, betterAuthSettingsPlugin } from "emdash-better-auth";
@@ -22,8 +22,6 @@ export default defineConfig({
 		react(),
 		emdash({
 			database: d1({ binding: "DB", session: "auto", coalesce: true }),
-			sandboxRunner: sandbox(),
-			registry: "https://registry.emdashcms.com",
 			authProviders: [betterAuthProvider()],
 			plugins: [betterAuthSettingsPlugin()],
 		}),
