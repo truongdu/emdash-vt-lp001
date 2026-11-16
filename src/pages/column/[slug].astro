@@ -77,3 +77,22 @@ function formatDate(d?: Date | null) {
 		</div>
 	</div>
 </Base>
+
+<style>
+  :global(#column main) {
+    padding-top: 100px;
+    padding-bottom: 80px;
+  }
+  .under_column_content .btn {
+    margin: 40px auto 0;
+  }
+  @media (max-width: 768px) {
+    :global(#column main) {
+      padding-top: 60px;
+      padding-bottom: 56px;
+    }
+    .under_column_content .btn {
+      margin-top: 32px;
+    }
+  }
+</style>
