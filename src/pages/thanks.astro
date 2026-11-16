@@ -8,11 +8,39 @@ import Base from "../layouts/Base.astro";
 			<h1>Cảm ơn bạn đã liên hệ</h1>
 		</div>
 	</article>
-	<div class="inner">
+	<section class="thanks-content inner">
 		<p>
 			Chúng tôi đã nhận được thông tin liên hệ của bạn và sẽ phản hồi trong
 			thời gian sớm nhất.
 		</p>
 		<p class="btn"><a href="/"><span class="bg"><span>Về trang chủ</span></span></a></p>
-	</div>
+	</section>
 </Base>
+
+<style>
+  :global(#thanks main) {
+    padding-top: 100px;
+  }
+  .thanks-content {
+    padding-top: 64px;
+    padding-bottom: 80px;
+    text-align: center;
+  }
+  .thanks-content > p:first-child {
+    max-width: 720px;
+    margin: 0 auto;
+    line-height: 1.8;
+  }
+  .thanks-content .btn {
+    margin: 32px auto 0;
+  }
+  @media (max-width: 768px) {
+    :global(#thanks main) {
+      padding-top: 60px;
+    }
+    .thanks-content {
+      padding-top: 40px;
+      padding-bottom: 56px;
+    }
+  }
+</style>
