@@ -77,9 +77,24 @@ const pageCtx = createPublicPageContext({
 		<link rel="stylesheet" href="/assets/css/fonts.css" />
 		<link rel="stylesheet" href="/assets/css/styles.css" />
 		<link rel="stylesheet" href="/assets/css/responsive.css" />
+		<style is:global>
+			/* header is position:fixed and has no background until scrolled,
+			   so the first block on inner pages needs clearance or its
+			   heading renders hidden behind the nav bar. */
+			#under_topinfo {
+				padding-top: 140px;
+			}
+			@media (max-width: 767px) {
+				#under_topinfo {
+					padding-top: 100px;
+				}
+			}
+		</style>
 	</head>
 	<body id={bodyId} class={bodyClass} oncontextmenu="return false">
 		<EmDashBodyStart page={pageCtx} />
+
+		<div id="fb-root"></div>
 
 		<div id="wrapper">
 			<header>
@@ -105,7 +120,7 @@ const pageCtx = createPublicPageContext({
 							<li><a href={anchor("service")}>Dịch vụ<span class="en">Service</span></a></li>
 							<li><a href={anchor("process")}>Quy trình<span class="en">Process</span></a></li>
 							<li><a href={anchor("faq")}>Q&amp;A<span class="en">Faq</span></a></li>
-							<li><a href="/column/">Column<span class="en">Column</span></a></li>
+							<li><a href="/column/">Chuyên mục<span class="en">Column</span></a></li>
 						</ul>
 						<p class="btn_main"><a href={anchor("contact")}>Liên hệ</a></p>
 					</nav>
@@ -133,7 +148,7 @@ const pageCtx = createPublicPageContext({
 								<li><a href={anchor("process")}>Quy trình</a></li>
 								<li><a href={anchor("faq")}>Q&amp;A</a></li>
 								<li><a href={anchor("contact")}>Liên hệ</a></li>
-								<li><a href="/column/">Column</a></li>
+								<li><a href="/column/">Chuyên mục</a></li>
 							</ul>
 						</div>
 					</div>
@@ -143,6 +158,21 @@ const pageCtx = createPublicPageContext({
 								<p class="name_company">CÔNG TY TNHH VIETRY</p>
 								<p class="location">Tầng 1, Tòa nhà EBM, số 683-685 Điện Biên Phủ, <br class="pc" />Phường Thạnh Mỹ Tây, Tp.Hồ Chí Minh, Việt Nam.</p>
 								<p class="tel"><a href="tel:02836367283">028-3636-7283</a></p>
+							</div>
+							<div
+								class="fb-page"
+								data-href="https://www.facebook.com/vietry.com.vn"
+								data-tabs="timeline"
+								data-width="340"
+								data-height="70"
+								data-small-header="false"
+								data-adapt-container-width="true"
+								data-hide-cover="false"
+								data-show-facepile="true"
+							>
+								<blockquote cite="https://www.facebook.com/vietry.com.vn" class="fb-xfbml-parse-ignore">
+									<a href="https://www.facebook.com/vietry.com.vn">VIETRY</a>
+								</blockquote>
 							</div>
 						</div>
 					</div>
@@ -167,5 +197,11 @@ const pageCtx = createPublicPageContext({
 		<script is:inline src="/assets/js/aos.js"></script>
 		<script is:inline src="/assets/js/slick.min.js"></script>
 		<script is:inline src="/assets/js/lottie-player.js"></script>
+		<script
+			is:inline
+			async
+			defer
+			crossorigin="anonymous"
+			src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v16.0&appId=463698824031803"></script>
 	</body>
 </html>

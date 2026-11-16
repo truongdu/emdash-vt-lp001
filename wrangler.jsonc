@@ -10,14 +10,14 @@
 			"database_name": "emdash-vt-lp001",
 		},
 	],
-	"r2_buckets": [
+	"kv_namespaces": [
 		{
-			"binding": "MEDIA",
-			"bucket_name": "emdash-vt-lp001-media",
+			"binding": "SESSION",
+			"id": "388fb96f0869485987654c352fcb92a3",
 		},
 	],
-	// Sandboxed plugins require Worker Loader, available on Workers paid plans.
-	"worker_loaders": [{ "binding": "LOADER" }],
+	// Sandboxed plugins require Worker Loader, available on Workers paid plans. Uncomment to enable:
+	// "worker_loaders": [{ "binding": "LOADER" }],
 	// General maintenance cron trigger
 	"triggers": {
 		"crons": ["* * * * *"],
