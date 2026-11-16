@@ -4,6 +4,7 @@ import tailwindcss from "@tailwindcss/vite";
 import { d1 } from "@emdash-cms/cloudflare";
 import { defineConfig } from "astro/config";
 import emdash from "emdash/astro";
+import { contactInbox } from "@mav3ndev/emdash-contact-inbox";
 import { betterAuthProvider, betterAuthSettingsPlugin } from "emdash-better-auth";
 
 export default defineConfig({
@@ -23,7 +24,7 @@ export default defineConfig({
 		emdash({
 			database: d1({ binding: "DB", session: "auto", coalesce: true }),
 			authProviders: [betterAuthProvider()],
-			plugins: [betterAuthSettingsPlugin()],
+			plugins: [betterAuthSettingsPlugin(), contactInbox()],
 		}),
 	],
 	devToolbar: { enabled: false },

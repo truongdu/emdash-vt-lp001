@@ -1,0 +1,109 @@
+				<div class="contact_form" data-aos="fade-up">
+					<form data-contact-form method="post" action="/_emdash/api/plugins/contact-inbox/submit">
+						<dl>
+							<dt>Họ và tên<span class="must">*</span></dt>
+							<dd><input type="text" name="name" maxlength="100" required /></dd>
+						</dl>
+						<dl>
+							<dt>Email<span class="must">*</span></dt>
+							<dd><input type="email" name="email" maxlength="254" required /></dd>
+						</dl>
+						<dl>
+							<dt>Số điện thoại</dt>
+							<dd><input type="tel" name="phone" maxlength="40" /></dd>
+						</dl>
+						<dl class="full">
+							<dt>Nội dung<span class="must">*</span></dt>
+							<dd><textarea name="message" rows="5" maxlength="4800" required></textarea></dd>
+						</dl>
+						<p class="hp-field" aria-hidden="true">
+							<label>Website</label>
+							<input type="text" name="website" tabindex="-1" autocomplete="off" />
+						</p>
+
+						<dl class="full privacy_txt">
+							<dd>
+								<label>
+									<input type="checkbox" name="accept_privacy" required />
+									Tôi đã đọc và chấp nhận <a href="/privacy-policy/" target="_blank" rel="noopener">chính sách bảo mật</a>
+								</label>
+							</dd>
+						</dl>
+						<dl class="full privacy_txt2">
+							<dd>
+								<label>
+									<input type="checkbox" name="accept_no_confirm" required />
+									Khi bạn nhấn nút gửi, thông tin sẽ được gửi đi mà không chuyển đến màn hình xác nhận. Vui lòng kiểm tra lại thông tin bạn đã nhập.
+								</label>
+							</dd>
+						</dl>
+
+						<div class="contact-turnstile" data-turnstile></div>
+						<p class="form_message" role="status" hidden></p>
+						<div class="list_btn">
+							<button type="submit" disabled>Gửi</button>
+						</div>
+					</form>
+				</div>
+
+				<style>
+					.hp-field {
+						position: absolute;
+						left: -9999px;
+						width: 1px;
+						height: 1px;
+						overflow: hidden;
+					}
+					.privacy_txt label,
+					.privacy_txt2 label {
+						display: flex;
+						align-items: center;
+						justify-content: center;
+						text-align: left;
+						gap: 8px;
+					}
+					.privacy_txt input[type="checkbox"],
+					.privacy_txt2 input[type="checkbox"] {
+						flex-shrink: 0;
+						width: 25px;
+						height: 25px;
+						margin: 0;
+					}
+					.form_message {
+						margin: 1em 0;
+						font-weight: bold;
+					}
+					.form_message.is-error {
+						color: #c0392b;
+					}
+					.form_message.is-success {
+						color: #27ae60;
+					}
+					.contact_form .list_btn button[type="submit"] {
+						display: flex;
+						align-items: center;
+						justify-content: center;
+						width: 220px;
+						height: 55px;
+						margin: 0 auto;
+						font-weight: 500;
+						font-size: 16px;
+						color: #fff;
+						background: var(--red);
+						border: none;
+						border-radius: 5px;
+						cursor: pointer;
+						transition: all ease 0.3s;
+					}
+					.contact_form .list_btn button[type="submit"]:hover {
+						background: var(--scolor, var(--red));
+						opacity: 0.9;
+					}
+					.contact_form .list_btn button[type="submit"]:disabled {
+						opacity: 0.6;
+						cursor: not-allowed;
+					}
+				</style>
+<script>
+import "../scripts/contact-form";
+</script>

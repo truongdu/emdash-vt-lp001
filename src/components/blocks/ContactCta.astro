@@ -1,4 +1,6 @@
 ---
+import ContactForm from "../ContactForm.astro";
+
 interface Props {
 	value: { heading: string; description?: string | null };
 }
@@ -16,29 +18,7 @@ const { value } = Astro.props;
 				<span class="vn">{value.heading}</span>
 			</h3>
 			{value.description && <p data-aos="fade-up">{value.description}</p>}
-			<div class="contact_form" data-aos="fade-up">
-				<form id="contact-form" method="post">
-					<p>
-						<label>Họ và tên<span class="req">必須</span></label>
-						<input type="text" name="name" required />
-					</p>
-					<p>
-						<label>Email<span class="req">必須</span></label>
-						<input type="email" name="email" required />
-					</p>
-					<p>
-						<label>Số điện thoại</label>
-						<input type="tel" name="phone" />
-					</p>
-					<p>
-						<label>Nội dung</label>
-						<textarea name="message" rows="5"></textarea>
-					</p>
-					<div class="list_btn">
-						<button type="submit">Gửi</button>
-					</div>
-				</form>
-			</div>
+			<ContactForm />
 		</div>
 	</div>
 </section>

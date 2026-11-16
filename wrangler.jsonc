@@ -16,7 +16,7 @@
 			"id": "388fb96f0869485987654c352fcb92a3",
 		},
 	],
-	// Sandboxed plugins require Worker Loader, available on Workers paid plans. Uncomment to enable:
+	// Sandboxed plugins require a Workers paid plan.
 	// "worker_loaders": [{ "binding": "LOADER" }],
 	// General maintenance cron trigger
 	"triggers": {
