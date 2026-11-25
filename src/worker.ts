@@ -14,6 +14,12 @@ function hash(value: string) {
 export default {
 	...handler,
 	fetch(request, env, ctx) {
+		const url = new URL(request.url);
+		if (import.meta.env.PROD && url.protocol === "http:") {
+			url.protocol = "https:";
+			return Response.redirect(url, 308);
+		}
+
 		const credentials = env.SITE_BASIC_AUTH;
 		if (!credentials) {
 			if (import.meta.env.DEV) return handler.fetch(request, env, ctx);
